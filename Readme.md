@@ -2,7 +2,7 @@
 
 A scalable and secure **Chatbot Backend API** built with **Node.js, Express, PostgreSQL, and Prisma**, supporting authentication, conversation management, chatbot responses, webhooks, role-based access control, and detailed Postman testing.
 
-This project is designed for **learning backend development**, **real-world API design**, and **MBProjects certification**.
+This project is designed for **learning backend development** and **real-world API design**.
 
 ---
 
@@ -26,7 +26,7 @@ This project is designed for **learning backend development**, **real-world API 
 - Feedback submission
 - Chat summaries
 
-### Webhooks (Admin Only)
+### Webhooks 
 - Register webhooks for chatbot events
 - Events supported:
   - CHAT_STARTED
@@ -111,7 +111,7 @@ JWT_EXPIRES_IN=1d
 
 ---
 
-## 🗄 Database Setup (Prisma)
+## Database Setup (Prisma)
 
 ###  Install Dependencies
 npm install
@@ -159,7 +159,7 @@ npm run dev
 
 ---
 
-## 🧪 Postman Testing
+## Postman Testing
 
 ### Environment Variables
 baseUrl
