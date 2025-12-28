@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  chats     Chat[]
+  feedbacks Feedback[]
+  createdAt DateTime @default(now())
+}
+
+model Chat {
+  id        String     @id @default(uuid())
+  userId    String
+  status    ChatStatus @default(ACTIVE)
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  user      User       @relation(fields: [userId], references: [id])
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  chatId    String
+  sender    Sender
+  content   String
+  createdAt DateTime @default(now())
+  chat      Chat     @relation(fields: [chatId], references: [id])
+}
+
+model Feedback {
+  id        String   @id @default(uuid())
+  userId    String
+  message   String
+  rating    Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Webhook {
+  id        String        @id @default(uuid())
+  url       String
+  event     WebhookEvent
+  secret    String
+  isActive  Boolean       @default(true)
+  createdAt DateTime      @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Sender {
+  USER
+  BOT
+}
+
+enum ChatStatus {
+  ACTIVE
+  ENDED
+}
+
+enum WebhookEvent {
+  USER_REGISTERED
+  CHAT_STARTED
+  MESSAGE_SENT
+  CHAT_ENDED
+  FEEDBACK_SUBMITTED
+  SUPPORT_ESCALATED
+}
